@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hannover Marathis Feedback</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="container">
+  <h2>🪔 Hannover Marathis — Feedback Form</h2>
+  <p>Your feedback is anonymous and helps us improve future events!</p>
+
+  <form method="POST" action="/submit">
+    <label>1. Overall Rating (1 = Poor, 5 = Excellent)</label>
+    <select name="rating" required>
+      <option value="">Select</option>
+      <option>5</option><option>4</option><option>3</option><option>2</option><option>1</option>
+    </select>
+
+    <label>2. Program Content</label>
+    <input type="text" name="program" placeholder="Your thoughts..." />
+
+    <label>3. Food & Hospitality</label>
+    <input type="text" name="food" placeholder="Your opinion..." />
+
+    <label>4. Venue</label>
+    <input type="text" name="venue" placeholder="Comments..." />
+
+    <label>5. Any Suggestions?</label>
+    <textarea name="suggestion" rows="3"></textarea>
+
+    <button type="submit">Submit Feedback</button>
+  </form>
+</div>
+</body>
+</html>

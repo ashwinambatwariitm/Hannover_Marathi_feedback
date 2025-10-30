@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>🎉 Hannover Marathis – Program Feedback Form</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background-color: #fff7e6;
+      color: #333;
+      margin: 0;
+      padding: 1.5rem;
+      line-height: 1.6;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #c75b12;
+    }
+    form {
+      max-width: 600px;
+      margin: auto;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      padding: 2rem;
+    }
+    .question {
+      margin-bottom: 1.5rem;
+    }
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+    textarea {
+      width: 100%;
+      height: 80px;
+      padding: 8px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      resize: vertical;
+      font-family: inherit;
+    }
+    input[type="submit"] {
+      display: block;
+      width: 100%;
+      background-color: #ff9933;
+      border: none;
+      color: white;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    input[type="submit"]:hover {
+      background-color: #cc7a00;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 1rem;
+      font-style: italic;
+      color: #555;
+    }
+    .emoji {
+      font-size: 1.2em;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>🎉 Hannover Marathis – Program Feedback Form</h1>
+  <p style="text-align:center;">🙏 Thank you for being part of our celebration!<br>
+  We would love to hear your feedback to make our future events even better.<br>
+  Please take a minute to share your thoughts 💬</p>
+
+  <form action="/submit" method="post">
+
+    <div class="question">
+      <label>🪔 1. Overall Experience</label>
+      <p>⭐ How was your overall experience at today’s event?</p>
+      <input type="radio" name="overall_experience" value="Excellent"> Excellent 🌟<br>
+      <input type="radio" name="overall_experience" value="Good"> Good 🙂<br>
+      <input type="radio" name="overall_experience" value="Average"> Average 😐<br>
+      <input type="radio" name="overall_experience" value="Needs Improvement"> Needs Improvement 🙁
+    </div>
+
+    <div class="question">
+      <label>🎵 2. Program Content</label>
+      <input type="radio" name="program_content" value="Very Entertaining"> Very Entertaining<br>
+      <input type="radio" name="program_content" value="Good Variety"> Good Variety<br>
+      <input type="radio" name="program_content" value="Could Include More Diversity"> Okay, could include more diversity<br>
+      <input type="radio" name="program_content" value="Needs Improvement"> Needs Improvement
+    </div>
+
+    <div class="question">
+      <label>🍽️ 3. Food and Hospitality</label>
+      <input type="radio" name="food" value="Excellent"> Excellent<br>
+      <input type="radio" name="food" value="Good"> Good<br>
+      <input type="radio" name="food" value="Average"> Average<br>
+      <input type="radio" name="food" value="Needs Improvement"> Needs Improvement
+    </div>
+
+    <div class="question">
+      <label>🕐 4. Event Management</label>
+      <input type="radio" name="management" value="Very Well Managed"> Very Well Managed<br>
+      <input type="radio" name="management" value="Mostly Good"> Mostly Good<br>
+      <input type="radio" name="management" value="Average"> Average<br>
+      <input type="radio" name="management" value="Needs Better Planning"> Needs Better Planning
+    </div>
+
+    <div class="question">
+      <label>💫 5. Venue and Facilities</label>
+      <input type="radio" name="venue" value="Excellent"> Excellent<br>
+      <input type="radio" name="venue" value="Good"> Good<br>
+      <input type="radio" name="venue" value="Average"> Average<br>
+      <input type="radio" name="venue" value="Needs Improvement"> Needs Improvement
+    </div>
+
+    <div class="question">
+      <label>🎭 6. Favorite Part of the Event</label>
+      <textarea name="favorite_part" placeholder="Which part of the program did you enjoy the most?"></textarea>
+    </div>
+
+    <div class="question">
+      <label>💡 7. Suggestions for Improvement</label>
+      <textarea name="suggestions" placeholder="What could we do better next time?"></textarea>
+    </div>
+
+    <div class="question">
+      <label>🌈 8. Would You Like to Contribute in Future Events?</label>
+      <input type="radio" name="volunteer" value="Yes"> Yes, I’d love to volunteer! 🙌<br>
+      <input type="radio" name="volunteer" value="Maybe"> Maybe, depending on my availability<br>
+      <input type="radio" name="volunteer" value="No"> Not at the moment
+    </div>
+
+    <div class="question">
+      <label>💬 9. Any Other Comments or Messages for the Team?</label>
+      <textarea name="comments" placeholder="Your thoughts, wishes, or messages..."></textarea>
+    </div>
+
+    <input type="submit" value="Submit Feedback 💌">
+  </form>
+
+  <div class="footer">
+    ❤️ Thank you! <br>
+    Together, let’s make the next Hannover Marathis event even more joyful and memorable! 🌟
+  </div>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>📊 Feedback Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background-color: #fffaf0;
+      color: #333;
+      padding: 20px;
+      margin: 0;
+    }
+
+    h1 {
+      text-align: center;
+      color: #c75b12;
+      margin-bottom: 0.5rem;
+    }
+
+    h3 {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    a.logout {
+      float: right;
+      background: #ff9933;
+      color: white;
+      padding: 8px 14px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    a.logout:hover {
+      background: #cc7a00;
+    }
+
+    .charts-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+      margin: 30px auto;
+      max-width: 1200px;
+    }
+
+    .chart-container {
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      padding: 20px;
+      text-align: center;
+      height: 300px;
+    }
+
+    .chart-container canvas {
+      width: 200px !important;
+      height: 200px !important;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 40px;
+      font-size: 14px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+
+    th {
+      background-color: #ff9933;
+      color: white;
+    }
+
+    tr:nth-child(even) {background-color: #f9f9f9;}
+  </style>
+</head>
+<body>
+
+  <a href="{{ url_for('logout') }}" class="logout">Logout</a>
+  <h1>📊 Feedback Dashboard</h1>
+  <h3>Total Feedback: {{ total_feedback }}</h3>
+
+  <div class="charts-grid">
+    <div class="chart-container"><h4>Overall Experience</h4><canvas id="overallChart"></canvas></div>
+    <div class="chart-container"><h4>Program</h4><canvas id="programChart"></canvas></div>
+    <div class="chart-container"><h4>Food</h4><canvas id="foodChart"></canvas></div>
+    <div class="chart-container"><h4>Management</h4><canvas id="managementChart"></canvas></div>
+    <div class="chart-container"><h4>Venue</h4><canvas id="venueChart"></canvas></div>
+    <div class="chart-container"><h4>Contribute</h4><canvas id="contributeChart"></canvas></div>
+  </div>
+
+  <h2>📋 All Feedback Entries</h2>
+  <table>
+    <tr>
+      <th>ID</th><th>Overall</th><th>Program</th><th>Food</th>
+      <th>Management</th><th>Venue</th><th>Favorite</th>
+      <th>Suggestions</th><th>Contribute</th><th>Comments</th><th>Timestamp</th>
+    </tr>
+    {% for r in rows %}
+    <tr>
+      {% for val in r %}
+      <td>{{ val }}</td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </table>
+
+  <script>
+    // Generate soft distinct colors for charts
+    const colors = [
+      ["#ff9933", "#ffcc66", "#ffe0b3", "#ffd480"],
+      ["#66b3ff", "#99ccff", "#cce6ff", "#3385ff"],
+      ["#ff9999", "#ffb3b3", "#ffcccc", "#ff6666"],
+      ["#99cc99", "#c2f0c2", "#b3e6b3", "#66cc66"],
+      ["#ff9966", "#ffb380", "#ffd1b3", "#ff8040"],
+      ["#b399ff", "#ccb3ff", "#d9ccff", "#a366ff"]
+    ];
+
+    // Helper to make pie charts
+    function makePieChart(id, dataObj, colorSet) {
+      const ctx = document.getElementById(id);
+      const labels = Object.keys(dataObj);
+      const values = Object.values(dataObj);
+      const total = values.reduce((a,b) => a+b, 0);
+      const percentages = values.map(v => ((v / total) * 100).toFixed(1));
+
+      new Chart(ctx, {
+        type: "pie",
+        data: {
+          labels: labels.map((l, i) => `${l} (${percentages[i]}%)`),
+          datasets: [{
+            data: values,
+            backgroundColor: colorSet,
+            borderColor: "#fff",
+            borderWidth: 2
+          }]
+        },
+        options: {
+          plugins: {
+            legend: {
+              position: "bottom",
+              labels: {
+                boxWidth: 15,
+                font: { size: 12 },
+                color: "#333"
+              }
+            },
+            tooltip: {
+              callbacks: {
+                label: (ctx) => `${ctx.label}: ${ctx.parsed} (${((ctx.parsed / total) * 100).toFixed(1)}%)`
+              }
+            }
+          }
+        }
+      });
+    }
+
+    // Create all pie charts
+    makePieChart("overallChart", {{ overall|tojson }}, colors[0]);
+    makePieChart("programChart", {{ program|tojson }}, colors[1]);
+    makePieChart("foodChart", {{ food|tojson }}, colors[2]);
+    makePieChart("managementChart", {{ management|tojson }}, colors[3]);
+    makePieChart("venueChart", {{ venue|tojson }}, colors[4]);
+    makePieChart("contributeChart", {{ contribute|tojson }}, colors[5]);
+  </script>
+
+</body>
+</html>
